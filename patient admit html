@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Self-Admission</title>
+    <style>
+        /* Base styles */
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+            --popover: 0 0% 100%;
+            --popover-foreground: 222.2 84% 4.9%;
+            --primary: 222.2 47.4% 11.2%;
+            --primary-foreground: 210 40% 98%;
+            --secondary: 210 40% 96.1%;
+            --secondary-foreground: 222.2 47.4% 11.2%;
+            --muted: 210 40% 96.1%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --accent: 210 40% 96.1%;
+            --accent-foreground: 222.2 47.4% 11.2%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 214.3 31.8% 91.4%;
+            --input: 214.3 31.8% 91.4%;
+            --ring: 222.2 84% 4.9%;
+            --radius: 0.5rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* Header styles */
+        header {
+            background-color: white;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .header-content {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: hsl(var(--foreground));
+        }
+
+        /* Main content styles */
+        main {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        /* Map placeholder styles */
+        .map-placeholder {
+            border: 4px dashed hsl(var(--border));
+            border-radius: var(--radius);
+            height: 24rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* Grid layout */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Card styles */
+        .card {
+            background-color: hsl(var(--card));
+            border-radius: var(--radius);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .card-header {
+            padding: 1.5rem 1.5rem 0;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: hsl(var(--muted-foreground));
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-footer {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Form styles */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        input, select {
+            all: unset;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--input));
+            background-color: transparent;
+            font-size: 0.875rem;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid hsl(var(--ring));
+            outline-offset: 2px;
+        }
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            height: 2.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: hsl(var(--primary) / 0.9);
+        }
+
+        /* Hospital list styles */
+        .hospital-list {
+            list-style-type: none;
+        }
+
+        .hospital-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .hospital-radio {
+            appearance: none;
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            display: grid;
+            place-content: center;
+        }
+
+        .hospital-radio::before {
+            content: "";
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.2s;
+            box-shadow: inset 1rem 1rem hsl(var(--primary));
+        }
+
+        .hospital-radio:checked::before {
+            transform: scale(1);
+        }
+
+        .hospital-info {
+            flex-grow: 1;
+        }
+
+        .hospital-name {
+            font-weight: 500;
+        }
+
+        .hospital-stats {
+            font-size: 0.875rem;
+            color: hsl(var(--muted-foreground));
+            display: flex;
+            align-items: center;
+        }
+
+        .hospital-stats svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Patient-Admission</h1>
+        </div>
+    </header>
+    <main>
+        <div class="map-placeholder">
+           <img src="Designer (3).png" alt="city hospital" width="1325" height="382">
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Nearby Hospitals</h2>
+                    <p class="card-description">Select a hospital for admission</p>
+                </div>
+                <div class="card-content">
+                    <ul class="hospital-list">
+                        <li class="hospital-item">
+                            <input type="radio" id="hospital-1" name="hospital" value="1" class="hospital-radio">
+                            <div class="hospital-info">
+                                <label for="hospital-1" class="hospital-name">City General Hospital</label>
+                                <div class="hospital-stats">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                    75% full • ~30 min wait
+                                </div>
+                            </div>
+                        </li>
+                        <li class="hospital-item">
+                            <input type="radio" id="hospital-2" name="hospital" value="2" class="hospital-radio">
+                            <div class="hospital-info">
+                                <label for="hospital-2" class="hospital-name">Riverside Medical Center</label>
+                                <div class="hospital-stats">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                    60% full • ~15 min wait
+                                </div>
+                            </div>
+                        </li>
+                        <li class="hospital-item">
+                            <input type="radio" id="hospital-3" name="hospital" value="3" class="hospital-radio">
+                            <div class="hospital-info">
+                                <label for="hospital-3" class="hospital-name">Central Health Hospital</label>
+                                <div class="hospital-stats">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                    90% full • ~45 min wait
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Patient Information</h2>
+                    <p class="card-description">Enter your details for admission</p>
+                </div>
+                <div class="card-content">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender">
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reason">Reason for Admission</label>
+                            <input type="text" id="reason" placeholder="Brief description of your condition">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button type="submit">Submit Admission Request</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
