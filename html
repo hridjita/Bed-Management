@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Bed Management Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+        }
+        .container {
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #000000;
+            color: white;
+            padding: 1rem;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .card-content {
+            padding: 1.5rem;
+        }
+        .bed-type-card {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+        .icon-container {
+            width: 3rem;
+            height: 3rem;
+            background-color: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #3b82f6;
+        }
+        .bed-info {
+            flex-grow: 1;
+        }
+        .bed-type {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+        }
+        .progress-bar {
+            height: 0.5rem;
+            background-color: #e5e7eb;
+            border-radius: 0.25rem;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        .progress {
+            height: 100%;
+            background-color: #6e6f70;
+        }
+        .bed-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        .occupied {
+            color: #6b7280;
+        }
+        .available {
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+        .available.green {
+            background-color: #10b981;
+            color: white;
+        }
+        .available.yellow {
+            background-color: #f59e0b;
+            color: white;
+        }
+        .available.red {
+            background-color: #ef4444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hospital Bed Management Dashboard</h1>
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Charnok Hospital</h2>
+                </div>
+                <div class="card-content">
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">General</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">75 / 100 occupied</span>
+                                <span class="available yellow">25 available</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">ICU</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">15 / 20 occupied</span>
+                                <span class="available red">5 available</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 17h16"/><path d="M4 12h16"/><path d="M6 17v4"/><path d="M18 17v4"/><path d="M6 7V3"/><path d="M18 7V3"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">Emergency</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 80%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">8 / 10 occupied</span>
+                                <span class="available red">2 available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Ohio Hospital</h2>
+                </div>
+                <div class="card-content">
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">General</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 66.67%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">100 / 150 occupied</span>
+                                <span class="available yellow">50 available</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">ICU</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 83.33%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">25 / 30 occupied</span>
+                                <span class="available red">5 available</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">Pediatric</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 80%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">20 / 25 occupied</span>
+                                <span class="available red">5 available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Apollo Hospital</h2>
+                </div>
+                <div class="card-content">
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">General</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 80%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">160 / 200 occupied</span>
+                                <span class="available red">40 available</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">ICU</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 87.5%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">35 / 40 occupied</span>
+                                <span class="available red">5 available</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bed-type-card">
+                        <div class="icon-container">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <div class="bed-info">
+                            <h3 class="bed-type">Cardiology</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 87.5%;"></div>
+                            </div>
+                            <div class="bed-stats">
+                                <span class="occupied">37 / 40 occupied</span>
+                                <span class="available red">3 available</span>
+                            </div>
+                        </div>
+                    </div>
+
+    </body>
+    
+</html>
+                    
