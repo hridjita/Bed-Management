@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Ward Services</title>
+    <link rel="stylesheet" href="emergency.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="min-h-screen bg-gray-100">
+        <header class="bg-red-600 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-2xl font-bold">Emergency Ward Services</h1>
+                <div class="flex items-center">
+                    <i data-lucide="phone" class="mr-2"></i>
+                    <span class="text-xl font-semibold">Emergency: 102</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="container mx-auto p-4">
+            <section class="mb-8">
+                <div class="flex gap-2">
+                    <input type="text" placeholder="Enter your location" class="flex-grow p-2 border rounded">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <i data-lucide="search" class="mr-2"></i> Find Hospitals
+                    </button>
+                </div>
+            </section>
+
+            <section class="mb-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Applo Hospital</h3>
+                        <span class="badge bg-red-500">High</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Wait time: 30 min</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Charnok Hospital</h3>
+                        <span class="badge bg-yellow-500">Medium</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Wait time: 15 min</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Neotia Hospital</h3>
+                        <span class="badge bg-green-500">Low</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Wait time: 5 min</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Ohio Hospital</h3>
+                        <span class="badge bg-yellow-500">Medium</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Wait time: 20 min</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Book Emergency Appointment</h3>
+                    </div>
+                    <div class="card-content">
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block mb-2">Hospitals</label>
+                                <select class="w-full p-2 border rounded">
+                                    <option value="">Selected Hospital</option>
+                                    <option value="apolo hospital">Applo Hospital</option>
+                                    <option value="charnok hospital">Charnok Hospital</option>
+                                    <option value="amri hospitals">Amri Hospitals</option>
+                                    <option value="medica hospitals">Medica Hospital</option>
+                                    <option value="ILS hospitals">ILS Hospital</option>
+                                    <option value="Others">Others</option>   
+                                </select>
+                                <input type="text" class="w-full p-2 border rounded" readonly>
+                            </div>
+                            <div>
+                                <label class="block mb-2">Emergency Type</label>
+                                <select class="w-full p-2 border rounded">
+                                    <option value="">Select Emergency Type</option>
+                                    <option value="Cardiac">Cardiac</option>
+                                    <option value="Trauma">Trauma</option>
+                                    <option value="Respiratory">Respiratory</option>
+                                    <option value="Neurological">Neurological</option>
+                                    <option value="Pediatric">Pediatric</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block mb-2">Doctors at Emergency</label>
+                                <select class="w-full p-2 border rounded">
+                                    <option value="">Availabile Doctors</option>
+                                    <option value="Dr.aich">Dr.Aich</option>
+                                    <option value="Dr.chowdhury">Dr.Chowdhury</option>
+                                    <option value="Dr.ghosh">Dr.Ghosh</option>
+                                    <option value="Dr.sarkar">Dr.Sarkar</option>
+                                    <option value="Dr. paul">Dr. Paul</option>
+                                    <option value="Dr. sen">Dr. Sen</option>
+                                    <option value="Dr. banerjee">Dr. Banerjee</option> 
+                                </select>
+                                <input type="text" class="w-full p-2 border rounded" readonly>
+                            </div>
+                            <div>
+                                <label class="block mb-2"> Enter description</label>
+                                <textarea name="comment" rows="4" cols="156">
+                                    Enter your comment here...
+                              </textarea>
+                            </div>
+                            <button class="w-full bg-blue-500 text-white px-4 py-2 rounded">    Book Now</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <button class="w-full bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-4 rounded text-lg font-bold">
+                    <i data-lucide="ambulance" class="mr-2"></i> Request Ambulance
+                </button>
+            </section>
+        </main>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
